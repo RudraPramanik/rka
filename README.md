@@ -52,3 +52,11 @@
    - For each category, store the matched menu items in the array along with the category name and the collection type.
    - This array will represent the final structured result containing the items for each category.
 
+
+
+##<--------------------->##
+## How to start the project server ##
+**clone the project**
+**make sure you have git installed in your local machine**
+**run "npm install"**
+**run "npm run dev" , navigate to the server that has been started**
