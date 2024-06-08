@@ -23,6 +23,7 @@
 6. **step:6 push the code in the current branch:**
    ```bash
    git push origin auth-bug-fix
+   
 7. **create a PR to review and merge**
   browse to github and create a pull request regarging this branch
 
@@ -50,51 +51,3 @@
    - For each category, store the matched menu items in the array along with the category name and the collection type.
    - This array will represent the final structured result containing the items for each category.
 
-
-implementation:
-
-```code
-const dummyArr = [
-    {
-        type: "Vegetarian",
-        menuItems: [
-            { id: 1, name: "Salad" },
-            { id: 2, name: "Veg Burger" },
-            { id: 3, name: "Pasta" }
-        ],
-        category: [{
-            name: "Starters",
-            menuItems: [1, 2]
-        }]
-    },
-    {
-        type: "Non-Vegetarian",
-        menuItems: [
-            { id: 4, name: "Chicken Wings" },
-            { id: 5, name: "Beef Burger" },
-            { id: 6, name: "Shrimp Pasta" }
-        ],
-        category: [{
-            name: "Main Course",
-            menuItems: [4, 5]
-        }]
-    }
-];
-
-const results = [];
-
-dummyArr.forEach(collection => {
-    const menuItemsMap = {};
-    collection.menuItems.forEach(item => {
-        menuItemsMap[item.id] = item;
-    });
-    
-    collection.category.forEach(cat => {
-        const itemsInCategory = cat.menuItems.map(id => menuItemsMap[id]);
-        results.push({
-            type: collection.type,
-            category: cat.name,
-            items: itemsInCategory
-        });
-    });
-});
