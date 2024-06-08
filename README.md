@@ -19,7 +19,7 @@
    git add .
 5. **step5: provide a git commit message**
    ```bash
-  git commit -m authentication bug fixed
+   git commit -m authentication-bug-fixed
 6. **step:6 push the code in the current branch:**
    ```bash
    git push origin auth-bug-fix
@@ -28,6 +28,7 @@
   browse to github and create a pull request regarging this branch
 
 
+##<--------------------------->##
 
 
  ### Steps to Resolve the Problem
