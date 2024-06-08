@@ -13,7 +13,7 @@
    git pull origin main
 3. **step:3 create a new Branch named hotfix/auth-bug-fix :**
    ```bash
-  git checkout -b hotfix/auth-bug-fix
+   git checkout -b auth-bug-fix
 4. **step:4 add the changes those are made:**
    ```bash
    git add .
