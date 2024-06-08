@@ -9,15 +9,15 @@ interface FoodCardProps extends FoodItem {
 
 const FoodCard: React.FC<FoodCardProps> = ({ id, name, description, price, onDelete, onEdit }) => {
   return (
-    <Card className="m-4">
+    <Card sx={{ backgroundColor: '#1a237e', color: 'white', m: 4 }}>
       <CardContent>
-        <Typography variant="h5">{name}</Typography>
-        <Typography>{description}</Typography>
-        <Typography>${price}</Typography>
+        <Typography variant="h5" sx={{ color: 'white' }}>{name}</Typography>
+        <Typography sx={{ color: 'white' }}>{description}</Typography>
+        <Typography sx={{ color: 'white' }}>${price}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => onEdit(id)}>Edit</Button>
-        <Button size="small" onClick={() => onDelete(id)}>Delete</Button>
+        <Button variant="outlined" size="small" sx={{ color: 'white' }} onClick={() => onEdit(id)}>Edit</Button>
+        <Button variant="outlined" size="small" sx={{ color: 'white' }} onClick={() => onDelete(id)}>Delete</Button>
       </CardActions>
     </Card>
   );

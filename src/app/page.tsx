@@ -15,9 +15,9 @@ const Home: React.FC = () => {
   };
 
   const handleEdit = (id: number) => {
-    const menuToEdit = menuItems.find(item => item.id === id);
-    if (menuToEdit) {
-      setEditingFood(menuToEdit);
+    const foodToEdit = menuItems.find((item) => item.id === id);
+    if (foodToEdit) {
+      setEditingFood(foodToEdit);
       setOpen(true);
     }
   };
@@ -46,10 +46,12 @@ const Home: React.FC = () => {
     <>
       <div className="container mx-auto">
         <div className="flex justify-end m-4">
-          <Button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleAddNewFood}>Add New Food</Button>
+          <Button variant="contained" className='bg-[#1a237e]' onClick={handleAddNewFood}>
+            Add New Food
+          </Button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {menuItems.map(food => (
+          {menuItems.map((food) => (
             <FoodCard key={food.id} {...food} onDelete={handleDelete} onEdit={handleEdit} />
           ))}
         </div>
@@ -65,3 +67,4 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+

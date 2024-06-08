@@ -63,7 +63,7 @@ const Form: React.FC<FormProps> = ({ onSave, existingFood, onCancel }) => {
         })}
       />
       <Box display="flex" justifyContent="space-between" mt={2}>
-        <Button type="submit" variant="contained" color="primary">Save</Button>
+        <Button type="submit" variant="contained" className='bg-[#1a237e]' >Save</Button>
         <Button type="button" variant="outlined" color="secondary" onClick={handleCancel}>Cancel</Button>
       </Box>
     </Box>
@@ -71,4 +71,3 @@ const Form: React.FC<FormProps> = ({ onSave, existingFood, onCancel }) => {
 };
 
 export default Form;
-

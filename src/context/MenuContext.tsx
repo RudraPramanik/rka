@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { FoodItem } from '../types';
 import { foodItems } from '@/utils/data';
 
-interface FoodContextProps {
+interface MenuContextProps {
   menuItems: FoodItem[];
   addFood: (food: Omit<FoodItem, 'id'>) => void;
   editFood: (food: FoodItem) => void;
@@ -10,12 +10,12 @@ interface FoodContextProps {
   getFood: (id: number) => FoodItem | undefined;
 }
 
-const MenuContext = createContext<FoodContextProps | undefined>(undefined);
+const MenuContext = createContext<MenuContextProps | undefined>(undefined);
 
-export const useMenu = () => {
+export const useMenu = (): MenuContextProps => {
   const context = useContext(MenuContext);
   if (!context) {
-    throw new Error('useFoodContext must be used within a FoodProvider');
+    throw new Error('useMenu must be used within a MenuProvider');
   }
   return context;
 };
@@ -25,19 +25,19 @@ export const MenuProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const addFood = (food: Omit<FoodItem, 'id'>) => {
     const newFood = { ...food, id: Date.now() };
-    setMenuItems([...menuItems, newFood]);
+    setMenuItems((prevItems) => [...prevItems, newFood]);
   };
 
   const editFood = (updatedFood: FoodItem) => {
-    setMenuItems(menuItems.map(item => (item.id === updatedFood.id ? updatedFood : item)));
+    setMenuItems((prevItems) => prevItems.map((item) => (item.id === updatedFood.id ? updatedFood : item)));
   };
 
   const deleteFood = (id: number) => {
-    setMenuItems(menuItems.filter(item => item.id !== id));
+    setMenuItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   const getFood = (id: number) => {
-    return menuItems.find(item => item.id === id);
+    return menuItems.find((item) => item.id === id);
   };
 
   return (
@@ -46,3 +46,4 @@ export const MenuProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     </MenuContext.Provider>
   );
 };
+

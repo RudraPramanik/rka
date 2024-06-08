@@ -4,7 +4,8 @@ import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
 
-const navItem =['Home', 'About', 'Contact']
+const navItems = ['Home', 'About', 'Contact'];
+
 const Navbar: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
@@ -20,15 +21,15 @@ const Navbar: React.FC = () => {
 
   const drawerList = (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: 250, backgroundColor: '#1a237e', height: '100%', color: 'white' }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {navItem.map((text) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
+        {navItems.map((text) => (
+          <ListItem button key={text} component={Link} href={`/${text.toLowerCase()}`}>
+            <ListItemText primary={text} sx={{ color: 'white' }} />
           </ListItem>
         ))}
       </List>
@@ -37,7 +38,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ backgroundColor: '#1a237e' }}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -52,9 +53,11 @@ const Navbar: React.FC = () => {
             Remote Kitchen
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <Button color="inherit" component={Link} href="/">Home</Button>
-            <Button color="inherit" component={Link} href="/">About</Button>
-            <Button color="inherit" component={Link} href="/">Contact</Button>
+            {navItems.map((item) => (
+              <Button key={item} color="inherit" component={Link} href={`/${item.toLowerCase()}`}>
+                {item}
+              </Button>
+            ))}
           </Box>
         </Toolbar>
       </AppBar>
