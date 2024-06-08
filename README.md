@@ -31,7 +31,7 @@
 ##<--------------------------->##
 
 
- ### Steps to Resolve the Problem
+ ### Ans 2: Steps to Resolve the Problem
 
 1. **Map the Array of Collections:**
    - Start by mapping through the array of collections. This will allow us to process each collection.
