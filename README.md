@@ -29,12 +29,72 @@
 
 
 
-  ## Ans 2 ##
+ ### Steps to Resolve the Problem
 
-  **Its an array object so first we will map the array,**
+1. **Map the Array of Collections:**
+   - Start by mapping through the array of collections. This will allow us to process each collection.
 
-  **then iterate/map through each manu item , where the key is an ID, so now we got the menu with specific ID**
+2. **Create a Lookup Map for Menu Items:**
+   - For each collection, iterate through the `menuItems` array.
+   - Create a map where the key is the `id` of the menu item and the value is the menu item object. 
 
-  **now we will iterate through each Category to get menuItemsID. Now Match Menu Items to Category IDs**
+3. **Iterate Through Each Category:**
+   - Within each collection, iterate through the `categories` array.
+   - For each category, get the `menuItemsIds` array, which contains the IDs of the menu items belonging to that category.
 
-  **create a array of collection that have matched menu items for each category and store them in that array object, this will be the result**
+4. **Match Menu Items to Category IDs:**
+   - Use the lookup map created in step 2 to fetch the corresponding menu items for each `menuItemsId` in the category.
+
+5. **Store the Results:**
+   - Create an array to hold the results.
+   - For each category, store the matched menu items in the array along with the category name and the collection type.
+   - This array will represent the final structured result containing the items for each category.
+
+
+implementation:
+
+```code
+const dummyArr = [
+    {
+        type: "Vegetarian",
+        menuItems: [
+            { id: 1, name: "Salad" },
+            { id: 2, name: "Veg Burger" },
+            { id: 3, name: "Pasta" }
+        ],
+        category: [{
+            name: "Starters",
+            menuItems: [1, 2]
+        }]
+    },
+    {
+        type: "Non-Vegetarian",
+        menuItems: [
+            { id: 4, name: "Chicken Wings" },
+            { id: 5, name: "Beef Burger" },
+            { id: 6, name: "Shrimp Pasta" }
+        ],
+        category: [{
+            name: "Main Course",
+            menuItems: [4, 5]
+        }]
+    }
+];
+
+const results = [];
+
+dummyArr.forEach(collection => {
+    const menuItemsMap = {};
+    collection.menuItems.forEach(item => {
+        menuItemsMap[item.id] = item;
+    });
+    
+    collection.category.forEach(cat => {
+        const itemsInCategory = cat.menuItems.map(id => menuItemsMap[id]);
+        results.push({
+            type: collection.type,
+            category: cat.name,
+            items: itemsInCategory
+        });
+    });
+});
