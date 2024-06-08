@@ -1,57 +1,67 @@
 'use client';
-import { foodItems } from '@/utils/data';
+import React, { useState } from 'react';
 import { FoodCard, Form } from '@/design-system';
 import { FoodItem } from '@/types';
-import { useState } from 'react';
+import { Dialog, DialogTitle, DialogContent, Button } from '@mui/material';
+import { useMenu } from '@/context/MenuContext';
 
 const Home: React.FC = () => {
-  const [menueItems, setMenuItems] = useState<FoodItem[]>(foodItems);
+  const { menuItems, addFood, editFood, deleteFood } = useMenu();
   const [editingFood, setEditingFood] = useState<FoodItem | undefined>(undefined);
-  const [showForm, setShowForm] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDelete = (id: number) => {
-    setMenuItems(menueItems.filter(item => item.id !== id));
+    deleteFood(id);
   };
 
   const handleEdit = (id: number) => {
-    const menueToEdit = menueItems.find(item => item.id === id);
-    if (menueToEdit) {
-      setEditingFood(menueToEdit);
-      setShowForm(true);
+    const menuToEdit = menuItems.find(item => item.id === id);
+    if (menuToEdit) {
+      setEditingFood(menuToEdit);
+      setOpen(true);
     }
   };
 
   const handleSave = (food: Omit<FoodItem, 'id'> & { id?: number }) => {
     if (food.id) {
-      setMenuItems(menueItems.map(item => item.id === food.id ? { ...food, id: food.id as number } : item));
+      editFood(food as FoodItem);
     } else {
-      setMenuItems([...menueItems, { ...food, id: Date.now() }]);
+      addFood(food);
     }
     setEditingFood(undefined);
-    setShowForm(false);
+    setOpen(false);
   };
 
   const handleAddNewFood = () => {
     setEditingFood(undefined);
-    setShowForm(true);
+    setOpen(true);
+  };
+
+  const handleCancel = () => {
+    setEditingFood(undefined);
+    setOpen(false);
   };
 
   return (
     <>
       <div className="container mx-auto">
         <div className="flex justify-end m-4">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleAddNewFood}>Add New Food</button>
+          <Button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleAddNewFood}>Add New Food</Button>
         </div>
-        {showForm && <Form onSave={handleSave} existingFood={editingFood} />}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {menueItems.map(food => (
+          {menuItems.map(food => (
             <FoodCard key={food.id} {...food} onDelete={handleDelete} onEdit={handleEdit} />
           ))}
         </div>
+        <Dialog open={open} onClose={handleCancel}>
+          <DialogTitle>{editingFood ? 'Edit Food' : 'Add New Food'}</DialogTitle>
+          <DialogContent>
+            <Form onSave={handleSave} existingFood={editingFood} onCancel={handleCancel} />
+          </DialogContent>
+        </Dialog>
       </div>
     </>
   );
 };
 
 export default Home;
-

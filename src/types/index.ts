@@ -5,3 +5,8 @@ export interface FoodItem {
     price: number;
   }
   
+  export interface FormInputs {
+    name: string;
+    description: string;
+    price: string;
+  }
