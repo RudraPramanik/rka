@@ -55,8 +55,34 @@
 
 
 ##<--------------------->##
-## How to start the project server ##
-**clone the project**
-**make sure you have git installed in your local machine**
-**run "npm install"**
-**run "npm run dev" , navigate to the server that has been started**
+
+## How to Start the Project Server
+
+1. **Clone the Project:**
+   - Make sure you have Git installed on your local machine.
+   - Run the following command to clone the project repository:
+     ```bash
+     git clone <repository-url>
+     ```
+
+2. **Install Dependencies:**
+   - Navigate to the project directory:
+     ```bash
+     cd <project-directory>
+     ```
+   - Run the following command to install all necessary dependencies:
+     ```bash
+     npm install
+     ```
+
+3. **Start the Development Server:**
+   - Run the following command to start the development server:
+     ```bash
+     npm run dev
+     ```
+   - Open your browser and navigate to the server that has been started (usually `http://localhost:3000`).
+
+4. **Enjoy Developing:**
+   - You are now ready to start developing on the project.
+
+Replace `<repository-url>` and `<project-directory>` with the actual repository URL and project directory name respectively.
